@@ -164,8 +164,6 @@ class NetworkActivity : AppCompatActivity() {
             Log.d("TAG","NetworkActivity:"+contactList)
             val adapter = NetworkAdapter(context,contactList)
             binding.recyclerView.adapter = adapter
-
-
         }
 
     }
