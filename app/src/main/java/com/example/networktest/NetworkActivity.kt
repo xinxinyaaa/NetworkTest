@@ -3,6 +3,8 @@ package com.example.networktest
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.networktest.databinding.ActivityNetworkBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -18,18 +20,36 @@ class NetworkActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        //viewModel = ViewModelProvider(this).get(NetworkViewModel::class.java)
-
-
-
+        //setContentView(R.layout.activity_main)
+        viewModel = ViewModelProvider(this).get(NetworkViewModel::class.java)
         binding = ActivityNetworkBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.sendRequestBtn.setOnClickListener {
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        val adapter = NetworkAdapter(this,viewModel.contactList)
+        binding.recyclerView.adapter = adapter
+        setContentView(binding.root)
+        sendRequestWithOkHttp()
+        /*binding.sendRequestBtn.setOnClickListener {
             //sendRequestWithHttpURLConnection()
             sendRequestWithOkHttp()
-        }
+        }*/
     }
+
+    /*override fun initListeners() {
+        super.initListeners()
+        binding = ActivityNetworkBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        val adapter = NetworkAdapter(this,viewModel.contactList)
+        recyclerView.adapter = adapter
+    }*/
+
+   /* override fun getLayoutId(): Int {
+        return R.layout.activity_network
+
+    }*/
+
 
     /*private fun sendRequestWithHttpURLConnection(){
         //开启线程发起网络请求
@@ -57,6 +77,7 @@ class NetworkActivity : AppCompatActivity() {
         }
     }*/
     private fun sendRequestWithOkHttp(){
+        Log.d("TAG","Send")
         thread {
             try {
                 val client = OkHttpClient()
@@ -65,9 +86,10 @@ class NetworkActivity : AppCompatActivity() {
                 val response = client.newCall(request).execute()
                 val responseData = response.body?.string()
                 if (responseData != null){
-                    showResponse(responseData)
+                    //showResponse(responseData)
                     //parseJSONWithJSONObject(responseData)
                     parseJSONWithGSON(responseData)
+                    Log.d("TAG","request")
                 }
 
             }catch (e:Exception){
@@ -76,14 +98,14 @@ class NetworkActivity : AppCompatActivity() {
         }
     }
 
-    private fun showResponse(response:String){
+    /*private fun showResponse(response:String){
         runOnUiThread {
             //进行UI操作，显示结果在界面上
             binding.responseText.text = response
 
         }
 
-    }
+    }*/
     /*private fun parseJSONWithJSONObject(jsonData: String){
         try {
             val jsonArray = JSONArray(jsonData)

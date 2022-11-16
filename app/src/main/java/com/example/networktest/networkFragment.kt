@@ -28,5 +28,7 @@ public class networkFragment: Fragment() {
         val layoutManager =  LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
        // adapter =
-    }*/
+    }
+
+    */
 }

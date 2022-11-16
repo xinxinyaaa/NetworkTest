@@ -6,4 +6,6 @@ class NetworkViewModel: ViewModel() {
     var id = ""
     var name = ""
     var followers = 0
+
+    val contactList = ArrayList<ListResponse>()
 }
