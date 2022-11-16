@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.networktest.databinding.ActivityNetworkBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import okhttp3.*
+import java.io.IOException
+import java.lang.Thread.currentThread
 import kotlin.concurrent.thread
 
 class NetworkActivity : AppCompatActivity() {
@@ -22,33 +23,29 @@ class NetworkActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
         viewModel = ViewModelProvider(this).get(NetworkViewModel::class.java)
-        binding = ActivityNetworkBinding.inflate(layoutInflater)
+        initData()
+        /*binding = ActivityNetworkBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = NetworkAdapter(this,viewModel.contactList)
         binding.recyclerView.adapter = adapter
         setContentView(binding.root)
-        sendRequestWithOkHttp()
+        sendRequestWithOkHttp()*/
         /*binding.sendRequestBtn.setOnClickListener {
             //sendRequestWithHttpURLConnection()
             sendRequestWithOkHttp()
         }*/
     }
 
-    /*override fun initListeners() {
-        super.initListeners()
+    fun initData(){
         binding = ActivityNetworkBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = NetworkAdapter(this,viewModel.contactList)
-        recyclerView.adapter = adapter
-    }*/
-
-   /* override fun getLayoutId(): Int {
-        return R.layout.activity_network
-
-    }*/
+        binding.recyclerView.adapter = adapter
+        setContentView(binding.root)
+        sendRequestWithOkHttp()
+    }
 
 
     /*private fun sendRequestWithHttpURLConnection(){
@@ -78,7 +75,23 @@ class NetworkActivity : AppCompatActivity() {
     }*/
     private fun sendRequestWithOkHttp(){
         Log.d("TAG","Send")
-        thread {
+        val client = OkHttpClient()
+        val request = Request.Builder().url("https://www.jianshu.com/p/289dfb1a839a").build()
+        //val request = Request.Builder().url("https://raw.githubusercontent.com/android10/Sample-Data/master/Android-CleanArchitecture/users.json").build()
+        Log.d("TAG","request")
+        client.newCall(request).enqueue(object :Callback{
+            override fun onFailure(call: Call, e: IOException) {
+                //println("未能获取数据："+ Thread.currentThread().name)
+                Log.d("TAG","未能获取数据")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                Log.d("TAG","成功获取数据")
+            }
+        })
+
+
+        /*thread {
             try {
                 val client = OkHttpClient()
                 //val request = Request.Builder().url("https://www.baidu.com").build()
@@ -95,7 +108,7 @@ class NetworkActivity : AppCompatActivity() {
             }catch (e:Exception){
                 e.printStackTrace()
             }
-        }
+        }*/
     }
 
     /*private fun showResponse(response:String){
