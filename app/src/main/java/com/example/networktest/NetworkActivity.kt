@@ -165,6 +165,7 @@ class NetworkActivity : AppCompatActivity() {
             val adapter = NetworkAdapter(context,contactList)
             binding.recyclerView.adapter = adapter
 
+
         }
 
     }
