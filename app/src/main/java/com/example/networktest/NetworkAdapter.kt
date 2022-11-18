@@ -11,19 +11,26 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
-class NetworkAdapter(var context: Context,var contactList: List<ListResponse>):
+class NetworkAdapter(var context: Context,var contactList: List<Person>):
     RecyclerView.Adapter<NetworkAdapter.ViewHolder>() {
     val TAG = "NetworkAdapter"
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val id : TextView = view.findViewById(R.id.id)
-        val name: TextView = view.findViewById(R.id.name)
+        val full_name: TextView = view.findViewById(R.id.full_name)
         val followers: TextView = view.findViewById(R.id.followers)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         Log.d("NetworkAdapter","onCreateViewHolder")
         val view = LayoutInflater.from(parent.context).inflate(R.layout.network_item,parent,false)
+        //return ViewHolder(view)
+        /*val viewHolder = ViewHolder(view)
+        viewHolder.itemView.setOnClickListener {
+            val position = viewHolder.adapterPosition
+            val contactList = contactList[position]
+
+        }*/
         //return ViewHolder(view)
         val viewHolder = ViewHolder(view)
         viewHolder.itemView.setOnClickListener {
@@ -60,7 +67,7 @@ class NetworkAdapter(var context: Context,var contactList: List<ListResponse>):
         Log.d("NetworkAdapter","onBindViewHolder")
         val list = contactList[position]
         holder.id.text = list.id.toString()
-        holder.name.text = list.name
+        holder.full_name.text = list.full_name
         holder.followers.text = list.followers.toString()
         Log.d("NetworkAdapter","contactList")
     }

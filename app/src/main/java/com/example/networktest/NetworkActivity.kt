@@ -19,10 +19,9 @@ import java.nio.charset.Charset
 
 class NetworkActivity : AppCompatActivity() {
     val TAG = "NetworkActivity"
-    //public final val TAG: String = "NetworkActivity"
     private lateinit var binding: ActivityNetworkBinding
     lateinit var viewModel: NetworkViewModel
-    
+
     private lateinit var context: Context
     //private lateinit var personList: ArrayList<PersonResponse>
 
@@ -54,8 +53,8 @@ class NetworkActivity : AppCompatActivity() {
         setContentView(binding.root)
         sendRequestWithOkHttp()
     }
-    
-    
+
+
 
 
     /*private fun sendRequestWithHttpURLConnection(){
@@ -160,7 +159,7 @@ class NetworkActivity : AppCompatActivity() {
     class ListHandler(val context: Context,val binding: ActivityNetworkBinding):Handler(Looper.getMainLooper()){
         override fun handleMessage(msg: Message) {
             //when(msg)
-            val contactList = msg.obj as List<ListResponse>
+            val contactList = msg.obj as List<Person>
             Log.d("TAG","NetworkActivity:"+contactList)
             val adapter = NetworkAdapter(context,contactList)
             binding.recyclerView.adapter = adapter
@@ -170,12 +169,12 @@ class NetworkActivity : AppCompatActivity() {
 
     private fun parseJSONWithGSON(jsonData: String){
         val gson = Gson()
-        val typeOf = object : TypeToken<List<ListResponse>>(){}.type
-        val contactList = gson.fromJson<List<ListResponse>>(jsonData, typeOf)
+        val typeOf = object : TypeToken<List<Person>>(){}.type
+        val contactList = gson.fromJson<List<Person>>(jsonData, typeOf)
         //personList = Gson().fromJson(jsonData,typeOf)
         for (person in contactList){
             Log.d(TAG,"id is ${person.id}")
-            Log.d(TAG,"full_name is ${person.name}")
+            Log.d(TAG,"full_name is ${person.full_name}")
             Log.d(TAG,"followers is ${person.followers}")
         }
 
@@ -187,23 +186,3 @@ class NetworkActivity : AppCompatActivity() {
         //listHandler.sendEmptyMessage(1)
     }
 }
-/*
-
-Handler() {
-    send()
-    handleMessage()
-}
-
-Handler handler = new Handler() {
-    @override
-    HandlerMessage() {
-
-    }
-}
-
-secondThread()
-{
-    main() {
-        handler.send(new Message(1))
-    }
-}*/
