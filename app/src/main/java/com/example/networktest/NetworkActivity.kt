@@ -45,7 +45,8 @@ class NetworkActivity : AppCompatActivity() {
         Log.d("TAG","Send")
         val client = OkHttpClient()
         //val request = Request.Builder().url("https://www.jianshu.com/p/289dfb1a839a").build()
-        val request = Request.Builder().url("https://raw.staticdn.net/android10/Sample-Data/master/Android-CleanArchitecture/users.json").build()
+        //val request = Request.Builder().url("https://raw.staticdn.net/android10/Sample-Data/master/Android-CleanArchitecture/users.json").build()
+        val request = Request.Builder().url("https://raw.staticdn.net/android10/Sample-Data/master/Android-CleanArchitecture/user_1.json").build()
         Log.d("TAG","request")
         client.newCall(request).enqueue(object :Callback{
 
