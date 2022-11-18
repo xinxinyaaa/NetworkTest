@@ -84,7 +84,6 @@ class NetworkActivity : AppCompatActivity() {
         val gson = Gson()
         val typeOf = object : TypeToken<List<Person>>(){}.type
         val contactList = gson.fromJson<List<Person>>(jsonData, typeOf)
-        //personList = Gson().fromJson(jsonData,typeOf)
         for (person in contactList){
             Log.d(TAG,"id is ${person.id}")
             Log.d(TAG,"full_name is ${person.full_name}")
