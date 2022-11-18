@@ -2,11 +2,9 @@ package com.example.networktest
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
-class Person(val id: Int, val full_name: String, val followers: Int) :Parcelable {
-    constructor(parcel: Parcel) : this(parcel.readInt(),parcel.toString(),parcel.readInt()) {
+class Person(val id: Int, val full_name: String?, val followers: Int) :Parcelable {
+    constructor(parcel: Parcel) : this(parcel.readInt(),parcel.readString(),parcel.readInt()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
