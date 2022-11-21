@@ -29,21 +29,18 @@ class NetworkItemDetail :AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //initData()
         sendRequestWithOkHttp()
     }
 
-    fun initData(){
+    /*fun initData(){
         binding = ActivityNetworkItemBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-
         //binding.id.text = "id"
         //binding.cover.setImageResource()
         binding.fullName.text = "fullname"
         sendRequestWithOkHttp()
-    }
+    }*/
 
     private fun sendRequestWithOkHttp(){
         val client = OkHttpClient()
