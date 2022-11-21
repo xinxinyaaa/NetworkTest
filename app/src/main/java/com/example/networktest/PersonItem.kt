@@ -3,7 +3,9 @@ package com.example.networktest
 import android.os.Parcel
 import android.os.Parcelable
 
-class PersonItem(val id: Int, val cover_url: String?, val full_name: String?, val description: String?, val followers: Int, val email: String?) :Parcelable {
+class PersonItem(val id: Int, val cover_url: String?, val full_name: String?, val description: String?, val followers: Int, val email: String?)
+
+    /*:Parcelable {
     constructor(parcel: Parcel) : this(parcel.readInt(),parcel.readString(),parcel.readString(),parcel.readString(),parcel.readInt(),parcel.readString()) {
     }
 
@@ -30,4 +32,4 @@ class PersonItem(val id: Int, val cover_url: String?, val full_name: String?, va
             return arrayOfNulls(size)
         }
     }
-}
+}*/
