@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
 class NetworkAdapter(var context: Context,var contactList: List<Person>):
@@ -38,12 +37,8 @@ class NetworkAdapter(var context: Context,var contactList: List<Person>):
             val contact = contactList[position]
             Log.d(TAG,"onClick"+position)
             val context = view.context
-            val intent = Intent(context,NetworkItemActivity::class.java)
-            val bundle = Bundle()
-            bundle.putInt("Int",1)
-            bundle.putParcelable("contact",contact)
-            Log.d(TAG,"setOnClickListener " + contact)
-            intent.putExtra("bundle",bundle)
+            //val intent = Intent(context,NetworkItemActivity::class.java)
+            val intent = Intent(context,NetworkDetailActivity::class.java)
             context.startActivity(intent)
         }
         return viewHolder

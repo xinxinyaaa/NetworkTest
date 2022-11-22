@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NetworkTest"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BluetoothActivity"></activity>
+        <activity android:name=".NetworkDetailActivity"></activity>
+        <activity android:name=".BluetoothActivity" />
         <activity
             android:name=".NetworkItemActivity"
             android:exported="false" />

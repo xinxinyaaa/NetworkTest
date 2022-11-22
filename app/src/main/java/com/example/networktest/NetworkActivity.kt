@@ -42,29 +42,24 @@ class NetworkActivity : AppCompatActivity() {
     }
 
     private fun sendRequestWithOkHttp(){
-        Log.d("TAG","Send")
+        Log.d(TAG,"Send")
         val client = OkHttpClient()
-        //val request = Request.Builder().url("https://www.jianshu.com/p/289dfb1a839a").build()
-        //val request = Request.Builder().url("https://raw.staticdn.net/android10/Sample-Data/master/Android-CleanArchitecture/users.json").build()
-        val request = Request.Builder().url("https://raw.staticdn.net/android10/Sample-Data/master/Android-CleanArchitecture/user_1.json").build()
-        Log.d("TAG","request")
+        val request = Request.Builder().url("https://raw.staticdn.net/android10/Sample-Data/master/Android-CleanArchitecture/users.json").build()
+        Log.d(TAG,"request")
         client.newCall(request).enqueue(object :Callback{
 
             override fun onFailure(call: Call, e: IOException) {
-                //println("未能获取数据："+ Thread.currentThread().name)
-                Log.d("TAG","未能获取数据")
+                Log.d(TAG,"未能获取数据")
             }
 
             override fun onResponse(call: Call, response: Response) {
                 var body = response.body
                 var bytes = body?.bytes()
                 var result = bytes?.toString(Charset.defaultCharset())
-                Log.d("TAG","成功获取数据"+result.toString())
+                Log.d(TAG,"成功获取数据"+result.toString())
                 if (result != null){
-                    //showResponse(responseData)
-                    //parseJSONWithJSONObject(responseData)
                     parseJSONWithGSON(result)
-                    Log.d("TAG","request")
+                    Log.d(TAG,"onResponse")
                 }
             }
         })
@@ -75,7 +70,7 @@ class NetworkActivity : AppCompatActivity() {
     class ListHandler(val context: Context,val binding: ActivityNetworkBinding):Handler(Looper.getMainLooper()){
         override fun handleMessage(msg: Message) {
             val contactList = msg.obj as List<Person>
-            Log.d("TAG","NetworkActivity:"+contactList)
+            Log.d("NetworkActivity","NetworkActivity:"+contactList)
             val adapter = NetworkAdapter(context,contactList)
             binding.recyclerView.adapter = adapter
         }
