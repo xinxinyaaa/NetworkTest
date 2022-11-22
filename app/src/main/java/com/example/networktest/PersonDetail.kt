@@ -3,7 +3,7 @@ package com.example.networktest
 import android.os.Parcel
 import android.os.Parcelable
 
-class PersonItem(val id: Int, val cover_url: String?, val full_name: String?, val description: String?, val followers: Int, val email: String?)
+class PersonDetail(val id: Int, val cover_url: String?, val full_name: String?, val description: String?, val followers: Int, val email: String?)
 
     /*:Parcelable {
     constructor(parcel: Parcel) : this(parcel.readInt(),parcel.readString(),parcel.readString(),parcel.readString(),parcel.readInt(),parcel.readString()) {
@@ -23,12 +23,12 @@ class PersonItem(val id: Int, val cover_url: String?, val full_name: String?, va
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<PersonItem> {
-        override fun createFromParcel(parcel: Parcel): PersonItem {
-            return PersonItem(parcel)
+    companion object CREATOR : Parcelable.Creator<PersonDetail> {
+        override fun createFromParcel(parcel: Parcel): PersonDetail {
+            return PersonDetail(parcel)
         }
 
-        override fun newArray(size: Int): Array<PersonItem?> {
+        override fun newArray(size: Int): Array<PersonDetail?> {
             return arrayOfNulls(size)
         }
     }
