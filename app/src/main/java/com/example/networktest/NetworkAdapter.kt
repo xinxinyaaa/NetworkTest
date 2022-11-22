@@ -40,11 +40,6 @@ class NetworkAdapter(var context: Context,var contactList: List<Person>):
             val context = view.context
             //val intent = Intent(context,NetworkItemActivity::class.java)
             val intent = Intent(context,NetworkDetailActivity::class.java)
-            val bundle = Bundle()
-            //bundle.putInt("Int",1)
-            bundle.putParcelable("contact",contact)
-            Log.d(TAG,"setOnClickListener " + contact)
-            intent.putExtra("bundle",bundle)
             context.startActivity(intent)
         }
         return viewHolder
