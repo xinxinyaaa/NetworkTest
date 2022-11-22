@@ -1,8 +1,8 @@
 package com.example.networktest
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import com.example.networktest.databinding.ActivityNetworkItemBinding
 
 class NetworkItemActivity (): AppCompatActivity(){
