@@ -25,6 +25,8 @@ class NetworkDetailActivity : AppCompatActivity(){
     private lateinit var followers: TextView
     private lateinit var email: TextView
     private lateinit var description: TextView
+    /*val bundle = intent.getBundleExtra("bundle")
+    val contact = bundle?.getParcelable<Person>("contact")*/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +55,7 @@ class NetworkDetailActivity : AppCompatActivity(){
 
     private fun sendRequestWithOkHttp(){
         val client = OkHttpClient()
-        val request = Request.Builder().url("https://raw.staticdn.net/android10/Sample-Data/master/Android-CleanArchitecture/user_$id.json").build()
+        val request = Request.Builder().url("https://raw.staticdn.net/android10/Sample-Data/master/Android-CleanArchitecture/user_${id.toString()}.json").build()
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.d(TAG,"未能获取数据")
@@ -63,7 +65,8 @@ class NetworkDetailActivity : AppCompatActivity(){
                 var body = response.body
                 var bytes = body?.bytes()
                 var result = bytes?.toString(Charset.defaultCharset())
-                Log.d(TAG,"成功获取数据"+result.toString())
+                val url = "https://raw.staticdn.net/android10/Sample-Data/master/Android-CleanArchitecture/user_${id.toString()}.json"
+                Log.d(TAG,"url is " + url)
                 if (result != null){
                     parseJSONWithGSON(result)
                     Log.d(TAG,"request")
